@@ -1,24 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './MyComponents/Header';
+import Dropdown from './MyComponents/Dropdown';
+import Cards1 from './MyComponents/Cards1';
+import {useState} from 'react';
+import LoadingBar from 'react-top-loading-bar';
 
 function App() {
+
+  const [progress, setprogress] = useState(0);
+  const [mobiles, setmobiles] = useState([]);
+
+  const setProgress = (progress) => {
+    setprogress(progress);
+  }
+
+  const setMobiles = (mobiles) => {
+    setmobiles(mobiles);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <LoadingBar color='#f11946'
+        progress={progress} />
+      <div className='flex flex-col md:flex-row my-14 xl:mx-20'>
+      <Dropdown setMobiles={setMobiles} progress={setProgress} />
+      <Cards1 mobiles={mobiles} />
+      </div>
+    </>
   );
 }
 
